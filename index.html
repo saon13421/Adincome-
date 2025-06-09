@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>এড দেখুন আর আয় করুন!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { margin:0; padding:0; font-family:sans-serif; background:#f9f9f9; }
+    .container { max-width:400px; margin:0 auto; padding:20px; text-align:center; }
+    h1 { color:#333; font-size:24px; margin-bottom:10px; }
+    .balance { font-size:20px; margin:10px 0; color:green; }
+    .btn {
+      display:inline-block; padding:15px 25px;
+      background:#007bff; color:#fff; text-decoration:none;
+      border-radius:5px; margin:10px 0; font-size:18px;
+    }
+    .btn:hover { background:#0056b3; }
+    .ad-section { margin:20px 0; }
+    iframe, .ad-banner { margin:10px 0; }
+    .payment-section { background:#fff; padding:10px; border-radius:5px; margin-top:20px; }
+    input[type=text] {
+      padding:10px; width:80%; border:1px solid #ccc;
+      border-radius:5px; margin:10px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎉 এড দেখুন আর আয় করুন!</h1>
+
+  <div class="balance">আপনার ব্যালেন্স: <span id="balance">0</span> টাকা</div>
+
+  <a href="#" class="btn" onclick="viewAd()">👉 এড দেখুন</a>
+
+  <div class="ad-section">
+    <div class="ad-banner">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '2a7421eafe69bdf6363ddc5c275659c6',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/2a7421eafe69bdf6363ddc5c275659c6/invoke.js"></script>
+    </div>
+  </div>
+
+  <div class="payment-section">
+    <h3>💸 টাকা উইথড্রো করুন</h3>
+    <p>কমপক্ষে ৫০ টাকা হলেই উইথড্রো করতে পারবেন।</p>
+    <input type="text" id="number" placeholder="আপনার নাম্বার লিখুন">
+    <button class="btn" onclick="withdraw()">উইথড্রো রিকোয়েস্ট</button>
+  </div>
+
+  <div class="ad-section">
+    <script type='text/javascript' src='//pl26816339.profitableratecpm.com/55/b0/d8/55b0d89811f27e46961ddcfa957cba48.js'></script>
+  </div>
+
+  <div class="ad-section">
+    <script type='text/javascript' src='//pl26862042.profitableratecpm.com/64/ae/16/64ae168596229976c283fcd8cbf0fe29.js'></script>
+  </div>
+
+  <div class="ad-section">
+    <script async="async" data-cfasync="false" src="//pl26862028.profitableratecpm.com/d8093c0038dd809ee3151cfd0d458607/invoke.js"></script>
+    <div id="container-d8093c0038dd809ee3151cfd0d458607"></div>
+  </div>
+
+</div>
+
+<script>
+  // লোকালস্টোরেজ থেকে ব্যালেন্স রিড
+  let balance = localStorage.getItem('balance') || 0;
+  document.getElementById('balance').innerText = balance;
+
+  // এড দেখলে নতুন ট্যাবে ওপেন এবং ব্যালেন্স আপডেট
+  function viewAd() {
+    window.open("https://www.profitableratecpm.com/ip353uez25?key=1b3c92ea13e6672b69581b0e3aff05f1", "_blank");
+    balance = parseFloat(balance) + 1;
+    localStorage.setItem('balance', balance);
+    document.getElementById('balance').innerText = balance;
+  }
+
+  // উইথড্রো রিকোয়েস্ট ফাংশন
+  function withdraw() {
+    let number = document.getElementById('number').value.trim();
+    if(number == ""){
+      alert("নাম্বার লিখুন।");
+      return;
+    }
+    if(balance < 20){
+      alert("কমপক্ষে ৫০ টাকা হলে উইথড্রো করতে পারবেন।");
+      return;
+    }
+    alert("আপনার উইথড্রো রিকোয়েস্ট নেওয়া হয়েছে।\nনাম্বার: " + number + "\nটাকা: " + balance);
+    balance = 0;
+    localStorage.setItem('balance', balance);
+    document.getElementById('balance').innerText = balance;
+    document.getElementById('number').value = "";
+  }
+</script>
+
+</body>
+</html>
