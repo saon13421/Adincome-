@@ -1,52 +1,12 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8" />
-<title>৫ সেকেন্ডে অ্যাড রিফ্রেশ</title>
-<style>
-  #ad-container {
-    width: 468px;
-    height: 60px;
-    margin: 50px auto;
-  }
-</style>
-</head>
-<body>
+import telebot
 
-<div id="ad-container"></div>
+TOKEN = "8445510886:AAF_JJeMflML8OmCfCamzCQdpYasOOkiTLo"
+bot = telebot.TeleBot(TOKEN)
 
-<script>
-const container = document.getElementById('ad-container');
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    user_id = message.from_user.id
+    bot.reply_to(message, f"👋 হ্যালো {message.from_user.first_name}!\n\nতোমার User ID হলো 👉 {user_id}")
 
-function loadAd() {
-  container.innerHTML = '';  // আগের অ্যাড মুছে ফেলো
-
-  // অ্যাড অপশন স্ক্রিপ্ট
-  const scriptOptions = document.createElement('script');
-  scriptOptions.type = 'text/javascript';
-  scriptOptions.text = `
-    atOptions = {
-      'key' : '29de97c2d42dc443c4bf1859fb318901',
-      'format' : 'iframe',
-      'height' : 60,
-      'width' : 468,
-      'params' : {}
-    };
-  `;
-  container.appendChild(scriptOptions);
-
-  // invoke.js স্ক্রিপ্ট লোড
-  const scriptInvoke = document.createElement('script');
-  scriptInvoke.type = 'text/javascript';
-  scriptInvoke.src = '//www.highperformanceformat.com/29de97c2d42dc443c4bf1859fb318901/invoke.js';
-  scriptInvoke.async = true;
-  container.appendChild(scriptInvoke);
-}
-
-loadAd(); // প্রথম লোড
-
-setInterval(loadAd, 5000);  // ৫ সেকেন্ড পর পর রিফ্রেশ
-</script>
-
-</body>
-</html>
+print("✅ Bot is running...")
+bot.polling()
